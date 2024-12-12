@@ -20,7 +20,8 @@ import { asciiArt } from './constants/ascii.js';
   */
   const rootDir = process.cwd();  
   const srcDir = path.join(rootDir, 'src');
-  asciiArt()
+
+  animateNextFoundryAscii()
 
   console.log(chalk.green(`\nSetting up the Next.js project structure with ${routerType} in ${srcDir}...`));
 
@@ -42,7 +43,7 @@ import { asciiArt } from './constants/ascii.js';
   Object.entries(starterFiles).forEach(([filePath, content]) => {
     fs.writeFileSync(path.join(srcDir, filePath), content);
   });
-  asciiArt()
+  animateNextFoundryAscii()
 
   console.log(chalk.green('\nYour Next.js project setup complete! Happy coding!🧑🏿‍💻'));
 })();
