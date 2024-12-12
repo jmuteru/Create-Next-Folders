@@ -7,7 +7,7 @@
 
 ## 🚀 **Installation**
 
-You can install **Next Foundryt** globally or run it directly using `npx` without installing:
+You can install **Next Foundry** globally or run it directly using `npx` without installing:
 
 ### Global Installation
 

@@ -1,3 +1,4 @@
+//This module is for future use ...
 export const cliPrompts =[
     {
         type: 'select',
