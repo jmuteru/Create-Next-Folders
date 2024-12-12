@@ -1,7 +1,7 @@
 {
   "type": "module",
   "name": "next-foundry",
-  "version": "1.0.0",
+  "version": "1.2.3",
   "description": "A CLI tool to scaffold Next.js projects with customizable folder structures.",
   "main": "src/index.js",
   "exports": {
@@ -17,6 +17,9 @@
   "bin": {
     "next-foundry": "./src/index.js"
   },
+  "files": [
+    "src/**/*"
+  ],
   "keywords": [
     "react",
     "cli",
