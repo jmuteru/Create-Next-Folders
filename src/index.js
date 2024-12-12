@@ -12,7 +12,12 @@ import { folderStructure } from './constants/folderStructure.js';
 
   const ext = response.language === 'ts' ? 'ts' : 'js';
   const routerType = response.router;
-  const rootDir = process.cwd();
+
+  /* we have to edit default project structure..
+    1. get current root directory.
+    2.make 'src' our new root dir. The folder structure format can be found in the README.md.
+  */
+  const rootDir = process.cwd();  
   const srcDir = path.join(rootDir, 'src');
 
   console.log(chalk.green(`\nSetting up the Next.js project structure with ${routerType} in ${srcDir}...`));
