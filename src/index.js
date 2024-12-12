@@ -6,6 +6,7 @@ import chalk from 'chalk';
 import prompts from 'prompts';
 import { cliPrompts } from './constants/cliPrompts.js';
 import { folderStructure } from './constants/folderStructure.js';
+import { asciiArt } from './constants/ascii.js';
 
 (async () => {
   const response = await prompts(cliPrompts);
@@ -19,6 +20,7 @@ import { folderStructure } from './constants/folderStructure.js';
   */
   const rootDir = process.cwd();  
   const srcDir = path.join(rootDir, 'src');
+  asciiArt()
 
   console.log(chalk.green(`\nSetting up the Next.js project structure with ${routerType} in ${srcDir}...`));
 
@@ -40,6 +42,7 @@ import { folderStructure } from './constants/folderStructure.js';
   Object.entries(starterFiles).forEach(([filePath, content]) => {
     fs.writeFileSync(path.join(srcDir, filePath), content);
   });
+  asciiArt()
 
   console.log(chalk.green('\nYour Next.js project setup complete! Happy coding!🧑🏿‍💻'));
 })();
