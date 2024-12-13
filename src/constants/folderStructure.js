@@ -11,7 +11,8 @@ export const folderStructure = {
     'contexts',             // React context for global state
     'services',             // API calls and services
     'store',                // Store for state management (Redux / Zustand..)
-    'types',                // TypeScript types
+    'types',                 // TypeScript types
+    'utils',                 //Utility files          
     'tests',                // Unit and integration tests
   ],
 
@@ -28,6 +29,7 @@ export const folderStructure = {
     'services',             // API calls and services
     'store',                // Store for state management (Redux / Zustand..)
     'types',                // TypeScript types
+    'utils',                 //Utility files          
     'tests',                // Unit and integration tests
   ],
 };

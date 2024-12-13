@@ -5,9 +5,10 @@ export const cliPrompts =[
         name: 'language',
         message: 'Choose the language for the project:',
         choices: [
-          { title: 'TypeScript', value: 'ts' },
-          { title: 'JavaScript', value: 'js' },
-        ],
+          { 
+  title: 'TypeScript ', 
+  value: 'ts',
+}      ],
       },
       {
         type: 'select',
