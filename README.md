@@ -117,4 +117,4 @@ We welcome contributions! Feel free to fork the repository and submit pull reque
 
 ## License
 
-MIT License – © Jeff Muteru 🧑🏿‍💻
+MIT License 
