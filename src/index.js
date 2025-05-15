@@ -3,47 +3,49 @@
 import fs from 'fs';
 import path from 'path';
 import chalk from 'chalk';
-import prompts from 'prompts';
-import { cliPrompts } from './constants/cliPrompts.js';
 import { folderStructure } from './constants/folderStructure.js';
 import { asciiArt } from './constants/ascii.js';
 
-(async () => {
-  const response = await prompts(cliPrompts);
+(() => {
+  const rootDir = process.cwd();
 
-  const ext = response.language === 'ts' ? 'ts' : 'js';
-  const routerType = response.router;
+  // check if the existing next js app uses Page or App router ...
+  const usesAppRouter = fs.existsSync(path.join(rootDir, 'app')) || fs.existsSync(path.join(rootDir, 'src', 'app'));
+  const usesPagesRouter = fs.existsSync(path.join(rootDir, 'pages')) || fs.existsSync(path.join(rootDir, 'src', 'pages'));
 
-  /* we have to edit default project structure..
-    1. get current root directory.
-    2.make 'src' our new root dir. The folder structure format can be found in the README.md.
-  */
-  const rootDir = process.cwd();  
-  const srcDir = path.join(rootDir, 'src');
+  let routerType = 'appRouter'; //default
+  if (usesPagesRouter && !usesAppRouter) {
+    routerType = 'pageRouter';
+  } else if (usesAppRouter && !usesPagesRouter) {
+    routerType = 'appRouter';
+  } else if (!usesAppRouter && !usesPagesRouter) {
+ 
+    console.log(chalk.yellow('No "app" or "pages" folder detected. Defaulting to App Router structure.'));
+  }
 
-  animateNextFoundryAscii()
+  const baseDir = routerType === 'pageRouter' ? path.join(rootDir, 'src') : rootDir;
 
-  console.log(chalk.green(`\nSetting up the Next.js project structure with ${routerType} in ${srcDir}...`));
+  asciiArt();
 
-  // Make directories based on router ...
+  console.log(
+    chalk.green(
+      `\nDetected a ${routerType === 'pageRouter' ? 'Pages Router' : 'App Router'} project. Creating directory structure in ${
+        routerType === 'pageRouter' ? 'src/' : 'root/'
+      }...`
+    )
+  );
+
+  // create missing directories only , do not overwrite...
   folderStructure[routerType].forEach((folder) => {
-    const fullPath = path.join(srcDir, folder);
-    fs.mkdirSync(fullPath, { recursive: true });
+    const fullPath = path.join(baseDir, folder);
+    if (!fs.existsSync(fullPath)) {
+      fs.mkdirSync(fullPath, { recursive: true });
+      console.log(chalk.blue(`Created: ${path.relative(rootDir, fullPath)}`));
+    } else {
+      console.log(chalk.gray(`Skipped (already exists): ${path.relative(rootDir, fullPath)}`));
+    }
   });
 
-  // Create starter/sample files depending on the selected router ...
-  const starterFiles = {
-    [`${routerType === 'pageRouter' ? 'pages' : 'app'}/index.${ext}`]: `import React from 'react';\n\nexport default function Home() {\n  return <div>Hello, World!</div>;\n}`,
-    [`${routerType === 'pageRouter' ? 'pages' : 'app'}/api/hello.${ext}`]: `export default function handler(req, res) {\n  res.status(200).json({ message: 'Hello, Next.js!' });\n}`,
-    [`components/common/Header.${ext}`]: `import React from 'react';\n\nconst Header = () => {\n  return <header><h1>Welcome to Next.js</h1></header>;\n};\n\nexport default Header;`,
-    [`components/layout/MainLayout.${ext}`]: `import React from 'react';\nimport Header from '../common/Header';\n\nconst MainLayout = ({ children }) => {\n  return (\n    <div>\n      <Header />\n      <main>{children}</main>\n    </div>\n  );\n};\n\nexport default MainLayout;`,
-    [`styles/globals.css`]: `body {\n  font-family: Arial, sans-serif;\n  margin: 0;\n  padding: 0;\n}`,
-  };
-
-  Object.entries(starterFiles).forEach(([filePath, content]) => {
-    fs.writeFileSync(path.join(srcDir, filePath), content);
-  });
-  animateNextFoundryAscii()
-
-  console.log(chalk.green('\nYour Next.js project setup complete! Happy coding!🧑🏿‍💻'));
+  asciiArt();
+  console.log(chalk.green('\n✅ Directory structure setup complete! 🚀'));
 })();

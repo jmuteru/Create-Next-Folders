@@ -1,21 +1,23 @@
 {
   "type": "module",
-  "name": "next-foundry",
-  "version": "1.0.0",
+  "name": "create-next-folders",
+  "version": "1.1.1",
   "description": "A CLI tool to scaffold Next.js projects with customizable folder structures.",
   "main": "src/index.js",
   "exports": {
     ".": "./src/index.js"
   },
   "scripts": {
-    "start": "node src/index.js"
+    "start": "node src/index.js",
+    "scaffold": "create-next-folders"
+
   },
   "dependencies": {
     "chalk": "^5.0.0",
     "prompts": "^2.4.1"
   },
   "bin": {
-    "next-foundry": "./src/index.js"
+    "create-next-folders": "./src/index.js"
   },
   "files": [
     "src/**/*"
@@ -25,8 +27,10 @@
     "cli",
     "next.js",
     "scaffold",
-    "project-structure"
+    "project-structure",
+    "create-next-folders",
+    "folder-structure"
   ],
-  "author": "Jeff Muteru 🧑🏿‍💻",
+  "author": "Jeff Muteru",
   "license": "MIT"
 }
