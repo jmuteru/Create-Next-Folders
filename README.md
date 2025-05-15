@@ -30,17 +30,13 @@ npm install --save-dev create-next-folders
 
 ## 🛠️ Usage
 
-Once installed, simply run the following command in your terminal to initialize a new Next.js project:
+Once installed in your project, simply run the following command in your terminal:
 
 ```bash
-npm run scaffold
+npx create-next-folders
 ```
 
-### Select Your Options
 
-After running the command, you'll be prompted with a few options to customize your Next.js setup.
-
----
 
 ## 🗂️ **Generated Folder Structure**
 
