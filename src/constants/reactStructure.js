@@ -11,3 +11,4 @@ export const reactFolderStructure = {
   router: ["src/routes"],
   testing: ["src/__tests__"],
 };
+//react folder

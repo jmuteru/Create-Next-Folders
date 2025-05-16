@@ -42,11 +42,11 @@ async function scaffoldNextProject() {
 
   // Check router type (existing logic)
   const usesAppRouter =
-    fs.existsSync(path.join(rootDir, "app")) ||
-    fs.existsSync(path.join(rootDir, "src", "app"));
+      fs.existsSync(path.join(rootDir, "app")) ||
+      fs.existsSync(path.join(rootDir, "src", "app"));
   const usesPagesRouter =
-    fs.existsSync(path.join(rootDir, "pages")) ||
-    fs.existsSync(path.join(rootDir, "src", "pages"));
+      fs.existsSync(path.join(rootDir, "pages")) ||
+      fs.existsSync(path.join(rootDir, "src", "pages"));
 
   let routerType = "appRouter";
   if (usesPagesRouter && !usesAppRouter) {
@@ -55,23 +55,23 @@ async function scaffoldNextProject() {
     routerType = "appRouter";
   } else if (!usesAppRouter && !usesPagesRouter) {
     console.log(
-      chalk.yellow(
-        'No "app" or "pages" folder detected. Defaulting to App Router structure.'
-      )
+        chalk.yellow(
+            'No "app" or "pages" folder detected. Defaulting to App Router structure.'
+        )
     );
   }
 
   const baseDir =
-    routerType === "pageRouter" ? path.join(rootDir, "src") : rootDir;
+      routerType === "pageRouter" ? path.join(rootDir, "src") : rootDir;
 
   console.log(
-    chalk.green(
-      `\nDetected a ${
-        routerType === "pageRouter" ? "Pages Router" : "App Router"
-      } project. Creating directory structure in ${
-        routerType === "pageRouter" ? "src/" : "root/"
-      }...`
-    )
+      chalk.green(
+          `\nDetected a ${
+              routerType === "pageRouter" ? "Pages Router" : "App Router"
+          } project. Creating directory structure in ${
+              routerType === "pageRouter" ? "src/" : "root/"
+          }...`
+      )
   );
 
   // Create Next.js folders
@@ -82,9 +82,9 @@ async function scaffoldNextProject() {
       console.log(chalk.blue(`Created: ${path.relative(rootDir, fullPath)}`));
     } else {
       console.log(
-        chalk.gray(
-          `Skipped (already exists): ${path.relative(rootDir, fullPath)}`
-        )
+          chalk.gray(
+              `Skipped (already exists): ${path.relative(rootDir, fullPath)}`
+          )
       );
     }
   });
@@ -101,7 +101,7 @@ async function scaffoldReactProject() {
       message: "Enter your React project name:",
       initial: "my-react-app",
       validate: (value) =>
-        value.trim() ? true : "Project name cannot be empty",
+          value.trim() ? true : "Project name cannot be empty",
     },
     {
       type: "select",
@@ -132,14 +132,14 @@ async function scaffoldReactProject() {
 
   if (fs.existsSync(projectPath)) {
     console.log(
-      chalk.red(`Error: Directory "${config.projectName}" already exists!`)
+        chalk.red(`Error: Directory "${config.projectName}" already exists!`)
     );
     process.exit(1);
   }
 
   // Create React project structure
   console.log(
-    chalk.green(`\nCreating React project "${config.projectName}"...`)
+      chalk.green(`\nCreating React project "${config.projectName}"...`)
   );
 
   // Create base directories
@@ -155,13 +155,13 @@ async function scaffoldReactProject() {
       const fullPath = path.join(projectPath, folder);
       fs.mkdirSync(fullPath, { recursive: true });
       console.log(
-        chalk.blue(`Created: ${path.relative(rootDir, fullPath)} (Redux)`)
+          chalk.blue(`Created: ${path.relative(rootDir, fullPath)} (Redux)`)
       );
     });
   }
 
   console.log(
-    chalk.green(`\nReact project "${config.projectName}" created successfully!`)
+      chalk.green(`\nReact project "${config.projectName}" created successfully!`)
   );
   console.log(chalk.blue(`\nNext steps:\n`));
   console.log(`cd ${config.projectName}`);
@@ -180,7 +180,7 @@ async function scaffoldViteReactProject() {
       message: "Enter your Vite React project name:",
       initial: "my-vite-app",
       validate: (value) =>
-        value.trim() ? true : "Project name cannot be empty",
+          value.trim() ? true : "Project name cannot be empty",
     },
     {
       type: "select",
@@ -211,23 +211,23 @@ async function scaffoldViteReactProject() {
 
   if (fs.existsSync(projectPath)) {
     console.log(
-      chalk.red(`Error: Directory "${config.projectName}" already exists!`)
+        chalk.red(`Error: Directory "${config.projectName}" already exists!`)
     );
     process.exit(1);
   }
 
   console.log(
-    chalk.green(`\nCreating Vite React project "${config.projectName}"...`)
+      chalk.green(`\nCreating Vite React project "${config.projectName}"...`)
   );
 
   // Run Vite create command
   const template = `react${config.template === "typescript" ? "-ts" : ""}`;
   execSync(
-    `npm create vite@latest ${config.projectName} -- --template ${template}`,
-    {
-      stdio: "inherit",
-      cwd: rootDir,
-    }
+      `npm create vite@latest ${config.projectName} -- --template ${template}`,
+      {
+        stdio: "inherit",
+        cwd: rootDir,
+      }
   );
 
   // Install additional features if selected
@@ -261,16 +261,16 @@ async function scaffoldViteReactProject() {
         const fullPath = path.join(projectPath, "src", folder);
         fs.mkdirSync(fullPath, { recursive: true });
         console.log(
-          chalk.blue(`Created: ${path.relative(rootDir, fullPath)} (Redux)`)
+            chalk.blue(`Created: ${path.relative(rootDir, fullPath)} (Redux)`)
         );
       });
     }
   }
 
   console.log(
-    chalk.green(
-      `\nVite React project "${config.projectName}" created successfully!`
-    )
+      chalk.green(
+          `\nVite React project "${config.projectName}" created successfully!`
+      )
   );
   console.log(chalk.blue(`\nNext steps:\n`));
   console.log(`cd ${config.projectName}`);
